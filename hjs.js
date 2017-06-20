@@ -21,6 +21,7 @@ println.count=0;
 ///////////////////////////
 
 function iType(obj){
+    if(obj==null) return "null";
     var st=typeof obj,
         obj_p=obj;
     switch(st){
