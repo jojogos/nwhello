@@ -51,7 +51,8 @@ var ostr=`015911078760�� ���ڣ�ʯ������������
         str    : ostr,
         num_ar : ostr.match(/\d+/g),
     };
-
+//////inits//////////////////////
+window.moveTo(1,1);
 
 //////////////choice exports itmes
 exports.println = println;
