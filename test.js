@@ -39,5 +39,5 @@ println("so4",iType(so4));
 println("so5",iType(so5));
 println("prototype obj",iType(Number.prototype));
 
-
+println("Object.prototype",iType(Object.prototype));
 
