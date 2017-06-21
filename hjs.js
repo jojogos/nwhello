@@ -102,8 +102,17 @@ let iLibs = (function (window) {
 			num_ar: ostr.match(/\d+/g),
 		};
 
-		/////////////////////////////////
+	/////////////////////////////////
 
+	function flattenArray(arr) {
+		return arr.reduce(
+			(acc, val) => acc.concat(
+				Array.isArray(val) ? flattenArray(val) : val
+			),
+			[]
+		);
+	}
+	///////////////////////////////////////
 	//////inits//////////////////////
 	window.moveTo(1, 1);
 
@@ -121,19 +130,18 @@ let iLibs = (function (window) {
 	}
 
 	//////////////choice exports itmes
-	
 
-	let innerExports = {
+
+	return {
 		println: println,
 		TDATA: TDATA,
 		iType: iType,
+		flattenArray:flattenArray,
 		es: {
 			doneClick: btn1Click,
 			actionClick: btn2Click,
 		}
 	};
-
-	return innerExports;
 }(this));
 
-var { println, TDATA, iType } = iLibs;
+var { println, TDATA, iType,flattenArray } = iLibs;
