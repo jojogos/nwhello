@@ -11,7 +11,7 @@ println("Libs", Object.getOwnPropertyNames(Libs));
 println("iLibs", Object.getOwnPropertyNames(iLibs));
 ///////////////////////////////////////////////////////
 
-$.getJSON('td.json',function(jsonObj){
+$.getJSON('jsons/td.json',function(jsonObj){
     $.each(jsonObj,function(idx,obj){
         println(idx,obj.Airplane);
     });
