@@ -63,7 +63,7 @@ let iLibs = (function (window) {
 		} else if (args.length == 1) {
 			outs += String(args[0])
 		}
-		$("#container").append(newp.text(outs));
+		$("#container").append(newp.html(outs));
 	}
 	println.count = 0;
 	///////////////////////////
