@@ -12,5 +12,12 @@
     //         return acc;
     //     }, [])
     // );
+    // let TSD = TDATA.str.split(';');
+    // TSD.forEach((v, i, ar) => {
+    //     let item = v.trim().split(',');
+    //     ar[i] = { name: item[0], phone: item[1] };
+    // });
+    // store.set('comunications', TSD);
 })();
 /////////////////////////////////
+
