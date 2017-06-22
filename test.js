@@ -1,4 +1,4 @@
-
+let log=console.log;
 let fns=[Function,Object,Number,Boolean,String,Array,Date];
 let ar=TDATA.num_ar;
 //////////////////////////////////////////////////
