@@ -3,11 +3,23 @@ let ar = TDATA.num_ar;
 let log = console.log;
 
 //////////////////////////////////////////////////
+function searchPhone(_val) {
+    let finded = findInComunications((v) => _val == v.name);
+    if (finded) {
+        $('#header-out1').text(finded.phone);
+    } else {
+        $('#header-out1').text("Not Find " + _val);
+    }
+    return true;
+}
 
 
-println("iLibs.es.doneClick([function]");
-println("iLibs.es.actionClick([function]");
-println("Libs", Object.getOwnPropertyNames(Libs));
-println("iLibs", Object.getOwnPropertyNames(iLibs));
-///////////////////////////////////////////////////////
+$('document').ready(function () {
+    window.moveTo(1, 1);
+    es.relinPressed(searchPhone);
+    es.doneClick(searchPhone);
+    let dbs = store.get('comunications'),
+        namess = $("#namess");
+    dbs.forEach(v => namess.append($("<option>").val(v.name)));
 
+});

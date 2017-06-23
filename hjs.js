@@ -1,87 +1,29 @@
 ﻿
-let Libs = function () {
+///////localStore generator////////
+(function () {
+	// $.getJSON('jsons/td.json', (jsonObj)=>store.set('DDList',jsonObj));
+	// let numar = TDATA.num_ar.map(v => v.replace(/0*/, ""))
+	// store.set('numbers',
+	//     numar.reduce((acc, val) => {
+	//         let topThree = val.slice(0, 3),
+	//             finded = acc.find(v => topThree == v.topThree);
+	//         finded ? finded.numbers.push(val)
+	//             : acc.push({ topThree: topThree, numbers: [val] });
+	//         return acc;
+	//     }, [])
+	// );
+	// let TSD = TDATA.str.split(';');
+	// TSD.forEach((v, i, ar) => {
+	//     let item = v.trim().split(',');
+	//     ar[i] = { name: item[0], phone: item[1] };
+	// });
+	// store.set('comunications', TSD);
 
-	let self = {
-		copy_obj: function (obj) {
-			let copy = Object.create(Object.getPrototypeOf(obj));
-			Object.getOwnPropertyNames(obj).forEach(function (item) {
-				let desc = Object.getOwnPropertyDescriptor(obj, item);
-				Object.defineProperty(copy, item, desc);
-			});
-			return copy;
-		},
-		get_all_proper: function get_all_proper(obj) {
-			let props = [];
-			while (obj) {
-				Object.getOwnPropertyNames(obj).forEach(function (prop) {
-					props.push(prop);
-				});
-				obj = Object.getPrototypeOf(obj);
-			}
-			return props;
-		},
+})();
 
-		getJSONfromUrl: function (url) {
-			return new Promise(function (resolve, reject) {
-				$.ajax({
-					url: url, type: "GET", dataType: "jsonp", jsonp: "callback",
-					success: function (data) { resolve(data); },
-					error: function () { reject(new Error('ajax get error')); },
-				});
-			});
-		},
-
-
-	}
-
-	return self;
-}();
-
-
-var iLibs = {
-	//////////////////////////////////////////////////////////   
-	println(...args) {
-		let newp = $("<P>");
-		let outs = `(${println['count']?println['count']+=1:println['count']=1}) `;
-		if (args.length > 1) {
-			outs += String(args[0]) + ": ";
-			for (var i = 1; i < args.length - 1; i++) {
-				outs += String(args[i]) + " , ";
-			}
-			outs += String(args[args.length - 1]);
-		} else if (args.length == 1) {
-			outs += String(args[0])
-		}
-		iType();
-		$("#container").append(newp.html(outs));
-	},
-
-	///////////////////////////
-
-	iType(obj) {
-		if (obj == null) return "null";
-		var st = typeof obj,
-			obj_p = obj;
-		switch (st) {
-			case "number":
-			case "boolean":
-			case "string":
-			case "undefined":
-				return st;
-			case "object":
-				obj_p = obj_p.constructor;
-			case "function":
-				return obj_p.name || obj_p.toString().match(/function\s*([^(]*)\(/)[1];
-		}
-	},
-
-
-
-
-	////////////////////
-	TDATA: function() {
-		let str =
-			`mcx,15911078760;
+TDATA = (function () {
+	let str =
+		`mcx,15911078760;
 			lbx,18676735935;
 			tjx,18688836568;
 			hzf,18965128957;
@@ -106,37 +48,48 @@ var iLibs = {
 			asc,13163765266;
 			afr,13510834141;
 			gas,18681588178`,
-			num_ar = str.match(/\d+/g);
-		return { str, num_ar };
-	}(),
+		num_ar = str.match(/\d+/g);
+	return { str, num_ar };
+})();
+//////////////events/////////////////////////////////////////////////////////////
+let { findInComunications,
+	getRelinVal, es
+     } = function () {
+		function setClickEvent(eleId, realFn) {
+			$(eleId).click(realFn);
+		}
 
-	/////////////////////////////////
+		function btn1Click(eFn) {
+			setClickEvent("#btn1", eFn);
+		}
+		function btn2Click(eFn) {
+			setClickEvent("#btn2", eFn);
+		}
+		function getRelinVal() {
+			return $("#relin").val();
+		}
 
-	flattenArray(arr) {
-		return arr.reduce(
-			(acc, val) => acc.concat(
-				Array.isArray(val) ? flattenArray(val) : val
-			),
-			[]
-		);
-	}
-}
-///////////////////////////////////////
-//////inits//////////////////////
-window.moveTo(1, 1);
+		return _rel = {
+			findInComunications(fn) {
+				let dbs = store.get('comunications');
+				return dbs.find(fn);
+			},
+			es: {
+				relinPressed(eFn, k_code = 13) {
+					$("#relin").keypress(e => {
+						if (e.keyCode == k_code || k_code == 'any') {
+							eFn(getRelinVal());
+							return false;
+						}
 
+					})
+				},
+				doneClick(eFn) {
+					btn1Click(function () {
+						eFn(getRelinVal());
+					});
+				}
+			}
+		};
+	}();
 
-/////////////////////envents
-function setClickEvent(eleId, eFn) {
-	$(eleId).click(eFn);
-}
-
-function btn1Click(eFn) {
-	setClickEvent("#btn1", eFn);
-}
-function btn2Click(eFn) {
-	setClickEvent("#btn2", eFn);
-}
-
-//////////////choice exports itmes
-let { println, TDATA, iType, flattenArray } = iLibs;
