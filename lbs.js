@@ -12,7 +12,7 @@ let { println,
 				let outs = `(${println['count'] ? println['count'] += 1 : println['count'] = 1}) `;
 				if (args.length > 1) {
 					outs += String(args[0]) + ": ";
-					for (var i = 1; i < args.length - 1; i++) {
+					for (let i = 1; i < args.length - 1; i++) {
 						outs += String(args[i]) + " , ";
 					}
 					outs += String(args[args.length - 1]);
@@ -25,7 +25,7 @@ let { println,
 
 			iType(obj) {
 				if (obj == null) return "null";
-				var st = typeof obj,
+				let st = typeof obj,
 					obj_p = obj;
 				switch (st) {
 					case "number":
