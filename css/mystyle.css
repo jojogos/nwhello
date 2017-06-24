@@ -4,3 +4,11 @@ p{
 .s-line{
 	display: inline;
 }
+
+.widthly{width:200px;height:400px;} 
+
+.divcss5{width:390px;height:280px;
+		 border:1px solid blue ;
+		 background-color: grey;
+		 color:blue;
+		 font-size:2ex;font-weight:bold} 
